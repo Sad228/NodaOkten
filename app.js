@@ -48,13 +48,14 @@ const fs = require('fs');
 //     if (err) throw new Error(err.message)
 // });
 
-fs.readdir(path.join(__dirname,'homeWork'),(err, files)=>{
+fs.readdir(path.join(__dirname,'homeWork'),{withFileTypes: true},(err, files)=>{
     if (err) throw new Error(err.message);
     files.forEach(file=>{
-        if (file.isFile) {
-            console.log(`files:${file}`)
-        }else {
-            console.log(`folders:${file}`)
+        if (file.isFile() === true) {
+            console.log(`is files: ${file.name}`)
+
+        } else {
+            console.log(`is folder: ${file.name}`)
         }
     })
-})
+});
